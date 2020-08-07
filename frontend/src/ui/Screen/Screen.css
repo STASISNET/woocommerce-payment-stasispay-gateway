@@ -1,0 +1,22 @@
+.screen {
+    padding: 60px 0 60px;
+    box-sizing: border-box;
+    min-height: 100vh;
+}
+
+.screen_center {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.screen_grey {
+    background-color: rgba(0, 0, 0, 0.03);
+}
+
+.screen__inner {
+    margin: 0 auto;
+    max-width: 600px;
+    padding: 0 8px;
+}

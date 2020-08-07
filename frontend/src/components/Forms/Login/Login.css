@@ -1,0 +1,29 @@
+.login {
+    min-height: 180px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.login__loader {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 1;
+}
+
+.login__field {
+    margin-bottom: 20px;
+}
+
+.login__text {
+    font-size: 14px;
+    text-align: center;
+    margin: 0 0 10px;
+}
+
+.login__icon {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}

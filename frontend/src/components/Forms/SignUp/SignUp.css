@@ -1,0 +1,38 @@
+.signup {
+    min-height: 180px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.signup__loader-wrapper {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    flex-grow: 1;
+}
+
+.signup__loader {
+    margin-bottom: 20px;
+}
+
+.signup__field {
+    margin-bottom: 20px;
+}
+
+.signup__field_pin {
+    margin: 20px 0 30px;
+}
+
+.signup__text {
+    font-size: 14px;
+    text-align: center;
+    margin: 0 0 10px;
+}
+
+.signup__icon {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
