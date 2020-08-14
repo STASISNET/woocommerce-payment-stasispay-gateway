@@ -11,7 +11,8 @@ export const Checkbox = React.memo(({isChecked, onToggleValue}) => {
                 control={
                     <CheckboxBase
                         color={"primary"}
-                        onChange={onToggleValue}                        
+                        onChange={onToggleValue}
+                        checked={isChecked}
                     />
                 }
                 label={<div className={'checkbox__text'}>I accept <a href={termsUrl} target={"_blank"}>Terms of Business</a></div>}
