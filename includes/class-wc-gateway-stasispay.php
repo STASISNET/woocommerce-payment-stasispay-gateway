@@ -30,7 +30,7 @@ class WC_StasisPay_Gateway extends WC_Payment_Gateway
     public function __construct()
     {
         $this->id = 'stasispay'; // payment gateway plugin ID
-        $this->icon = apply_filters('woocommerce_gateway_stasis_icon', plugins_url('/assets/images/stasis.png', dirname(__FILE__)));
+        $this->icon = apply_filters('woocommerce_gateway_stasispay_icon', plugins_url('/assets/images/stasis.png', dirname(__FILE__)));
         $this->has_fields = true; // in case you need a custom credit card form
         $this->method_title = 'StasisPay Gateway';
         $this->method_description = 'Take payment with credit cards and EURS'; // will be displayed on the options page
@@ -203,7 +203,7 @@ class WC_StasisPay_Gateway extends WC_Payment_Gateway
                     try {
                         $data = $this->make_api_request('auth/token/', $args);
                         $auth_token = $data->token;
-                    } catch (Exception $e) {
+                    } catch (APIException $e) {
                         wp_send_json(array(
                             "detail" => $e->data->detail,
                             "redirect" => false
@@ -301,7 +301,7 @@ class WC_StasisPay_Gateway extends WC_Payment_Gateway
                         $html .= "<div>Waiting for transaction...<br/>It shouldn't take more than 1 minute.</div>";
 
                         # echo $html;
-                        wp_die($html, 'StasisPay');
+                        wp_die($html, 'StasisPay', array( 'response' => 200 ));
                     }
                 }
             } else {
