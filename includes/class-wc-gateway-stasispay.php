@@ -565,7 +565,7 @@ class WC_StasisPay_Gateway extends WC_Payment_Gateway
         } catch (Exception $e) {
             if (isset($e->data->amount) && ($e->data->amount[0] === "Limit is exceeded")) {
                 $html .= '<span>Your €250 limit within individual STASIS Pay account is exceeded!</span><br/>';
-                $html .= '<span>Please proceed to <a href="https://gozo.pro/" target="_blank">Gozo.pro</a> to complete Full verification, ';
+                $html .= '<span>Please proceed to <a href="https://stasis.net/sellback/" target="_blank">STASIS</a> to complete Full verification, ';
                 $html .= 'or use <a href="' . WC() -> api_request_url('wc_gateway_' . $this->id) . "?action=logout&key=" . $order->get_order_key() . '">another account</a>.';
             } else {
                 $html .= var_dump($e->data);
