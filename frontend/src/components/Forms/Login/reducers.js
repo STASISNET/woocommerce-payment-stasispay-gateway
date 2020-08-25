@@ -3,28 +3,31 @@ import {
     CHANGE_PASSWORD_VALUE,
     SET_FORM_TYPE,
     SET_LOGIN_ERRORS,
-    SET_PASSWORD_ERRORS
-} from "./actions";
+    SET_PASSWORD_ERRORS,
+    SET_UPGRADE_MESSAGE,
+} from './actions';
 
 const initialState = {
     login: {
-        value: ''
+        value: '',
+        upgrade: false,
     },
     password: {
-        value: ''
+        value: '',
     },
-    formType: "INPUT"
+    formType: 'INPUT',
 };
 
-export const loginReducer = function(state = initialState, action) {
+export const loginReducer = function (state = initialState, action) {
     switch (action.type) {
         case CHANGE_LOGIN_VALUE: {
             return {
                 ...state,
                 login: {
                     value: action.payload.value,
-                    errors: undefined
-                }
+                    errors: undefined,
+                    upgrade: false,
+                },
             };
         }
 
@@ -33,9 +36,19 @@ export const loginReducer = function(state = initialState, action) {
                 ...state,
                 login: {
                     ...state.login,
-                    errors: action.payload.errors
-                }
-            }
+                    errors: action.payload.errors,
+                },
+            };
+        }
+
+        case SET_UPGRADE_MESSAGE: {
+            return {
+                ...state,
+                login: {
+                    ...state.login,
+                    upgrade: action.payload.enabled,
+                },
+            };
         }
 
         case CHANGE_PASSWORD_VALUE: {
@@ -43,9 +56,9 @@ export const loginReducer = function(state = initialState, action) {
                 ...state,
                 password: {
                     value: action.payload.value,
-                    errors: undefined
-                }
-            }
+                    errors: undefined,
+                },
+            };
         }
 
         case SET_PASSWORD_ERRORS: {
@@ -53,19 +66,19 @@ export const loginReducer = function(state = initialState, action) {
                 ...state,
                 password: {
                     ...state.password,
-                    errors: action.payload.errors
-                }
-            }
+                    errors: action.payload.errors,
+                },
+            };
         }
 
         case SET_FORM_TYPE: {
             return {
                 ...state,
-                formType: action.payload.type
-            }
+                formType: action.payload.type,
+            };
         }
 
         default:
             return state;
     }
-}
+};

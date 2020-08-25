@@ -1,6 +1,6 @@
 import * as React from 'react';
-import {TextFieldDecorator} from "../../../../ui/TextFieldDecorator/TextFieldDecorator";
-import {useCallback} from "react";
+import { useCallback } from "react";
+import { TextFieldDecorator } from "../../../../ui/TextFieldDecorator/TextFieldDecorator";
 
 
 export const LoginInput = React.memo(props => {

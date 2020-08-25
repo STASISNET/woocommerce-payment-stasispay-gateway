@@ -1,22 +1,23 @@
 import { connect } from 'react-redux';
-
-import {onLoginButtonClick} from "./thunkActions";
-import {Login} from ".";
+import { Login } from '.';
+import { onLoginButtonClick } from './thunkActions';
 
 const mapStateToProps = (state) => {
     return {
         type: state.login.formType,
-        isButtonDisabled: !state.login.login.value || !state.login.password.value
-    }
-}
+        upgrade: state.login.login.upgrade,
+        isButtonDisabled:
+            !state.login.login.value || !state.login.password.value,
+    };
+};
 
 const mapDispatchToProps = (dispatch) => {
     return {
         onLoginButtonClick: () => {
             dispatch(onLoginButtonClick());
-        }
-    }
-}
+        },
+    };
+};
 
 export const LoginContainer = connect(
     mapStateToProps,

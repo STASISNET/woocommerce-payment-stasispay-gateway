@@ -215,23 +215,33 @@ class WC_StasisPay_Gateway extends WC_Payment_Gateway
                         $data = $this->make_api_request('verification/', null, $auth_token, "GET");
 
                         if ($data->state == "not_sent") {
-                            $this->make_api_request(
-                                'verification/',
-                                array(
-                                "verification_type" => "one_step",
-                                "user_type" => "individual"
-                            ),
-                                $auth_token,
-                                "PATCH"
-                            );
+                            if ($data->verification_type == "full") {
+                                wp_send_json(array(
+                                    "upgrade" => 'Please complete your Full verification at <a href="https://stasis.net/sellback/
+">STASIS Sellback</a> to proceed. It will take about 10 minutes.',
+                                    "detail" => null,
+                                    "redirect" => false
+                                ));
+                                wp_die();
+                            } else {
+                                $this->make_api_request(
+                                    'verification/',
+                                    array(
+                                        "verification_type" => "one_step",
+                                        "user_type" => "individual"
+                                    ),
+                                    $auth_token,
+                                    "PATCH"
+                                );
 
-                            $this->make_api_request(
-                                'verification/documents/sign/',
-                                array("type" => "gozo_disclaimer"),
-                                $auth_token
-                            );
+                                $this->make_api_request(
+                                    'verification/documents/sign/',
+                                    array("type" => "gozo_disclaimer"),
+                                    $auth_token
+                                );
 
-                            $this->make_api_request("verification/submit/", null, $auth_token);
+                                $this->make_api_request("verification/submit/", null, $auth_token);
+                            }
                         }
 
                         WC()->session->set('stasispay-auth-token', $auth_token);
@@ -461,15 +471,15 @@ class WC_StasisPay_Gateway extends WC_Payment_Gateway
         }
 
         # wp_register_script('form-runtime-main', plugins_url('/frontend/build/static/js/runtime-main.js', dirname(__FILE__)), false, false, true);
-        wp_register_script('form-main-chunk', plugins_url('/frontend/build/static/js/main.chunk.js', dirname(__FILE__)), array("form-2-chunk"), false, true);
-        wp_register_script('form-2-chunk', plugins_url('/frontend/build/static/js/2.chunk.js', dirname(__FILE__)), false, false, true);
+        wp_register_script('form-main-chunk', plugins_url('/frontend/build/static/js/main.chunk.js', dirname(__FILE__)), array("form-2-chunk"), "v1.0.12", true);
+        wp_register_script('form-2-chunk', plugins_url('/frontend/build/static/js/2.chunk.js', dirname(__FILE__)), false, "v1.0.12", true);
 
-        wp_register_style('form-styles', plugins_url('/frontend/build/static/css/main.chunk.css', dirname(__FILE__)));
+        wp_register_style('form-styles', plugins_url('/frontend/build/static/css/main.chunk.css', dirname(__FILE__)), false, "v1.0.12");
 
         # wp_enqueue_script('form-runtime-main');
         wp_enqueue_script('form-2-chunk');
         wp_enqueue_script('form-main-chunk');
-        wp_enqueue_style("form-styles");
+        wp_enqueue_style('form-styles');
     }
 
     /*
